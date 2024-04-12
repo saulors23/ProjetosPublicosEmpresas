@@ -104,7 +104,7 @@ namespace CadastroClientes.Web.Controllers
                         }
 
                         // Atribuir o caminho relativo do arquivo ao campo Logotipo
-                        cliente.Logotipo = "/images/" + fileName;
+                        cliente.Logotipo = fileName;
                     }
 
                     await _clienteService.AddCliente(cliente);

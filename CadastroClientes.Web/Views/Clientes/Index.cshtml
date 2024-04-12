@@ -26,7 +26,7 @@
                     <th style="width: 210px">Email</th>
                     <th style="width: 90px">DataInclusão</th>
                     <th style="width: 70px">DataAlteração</th>
-                    <th style="width: 40px"><em class="fa fa-cog"></em></th>
+                    <th style="width: 60px"><em class="fa fa-cog"></em></th>
                 </tr>
             </thead>
             <tbody>
@@ -40,9 +40,9 @@
                             <td>@(clientes.DataInclusao.ToString("dd/MM/yyyy"))</td>
                             <td>@(clientes.DataAlteracao.HasValue ? clientes.DataAlteracao.Value.ToString("dd/MM/yyyy") : "N/A")</td>
                             <td>
-                                <a asp-action="Details" asp-route-id="@clientes.Id" style="color: blue" title="Visualiza os Detalhes do Cliente"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                <a asp-action="Details" asp-route-id="@clientes.Id" style="color: blue" title="Visualiza os Detalhes do Cliente"><i class="fa-solid fa-magnifying-glass"></i></a> |
                                 <a asp-action="Edit" asp-route-id="@clientes.Id" style="color: green" title="Edita os Dados do Cliente"><i class="fas fa-edit"></i> </a> |
-                                <a asp-action="Delete" asp-route-id="@clientes.Id" style="color: red" title="Exclui o Cadastro do Cliente"><i class="fas fa-trash-alt"></i>  </a>
+                                <a asp-action="Delete" asp-route-id="@clientes.Id" style="color: red" title="Exclui o Cadastro do Cliente"><i class="fas fa-trash-alt"></i>  </a> |
                                 <a asp-action="Index" asp-controller="Logradouros" asp-route-clienteid="@clientes.Id" style="color: #ff9900" title="Adiciona um Logradouro para o Cliente"><i class="fa-solid fa-city"></i>  </a>
                             </td>
                         </tr>
