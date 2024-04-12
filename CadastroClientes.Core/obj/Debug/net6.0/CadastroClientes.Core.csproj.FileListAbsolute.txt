@@ -1,0 +1,12 @@
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\bin\Debug\net6.0\CadastroClientes.Core.deps.json
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\bin\Debug\net6.0\CadastroClientes.Core.dll
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\bin\Debug\net6.0\CadastroClientes.Core.pdb
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\CadastroClientes.Core.csproj.AssemblyReference.cache
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\CadastroClientes.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\CadastroClientes.Core.AssemblyInfoInputs.cache
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\CadastroClientes.Core.AssemblyInfo.cs
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\CadastroClientes.Core.csproj.CoreCompileInputs.cache
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\CadastroClientes.Core.dll
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\refint\CadastroClientes.Core.dll
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\CadastroClientes.Core.pdb
+C:\Users\Saulo\Desktop\EmpresasEntrevista\ThomasGreg\CadastroClientes.Core\obj\Debug\net6.0\ref\CadastroClientes.Core.dll
