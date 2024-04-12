@@ -1,0 +1,78 @@
+﻿@using System.IO
+@model CadastroClientes.Core.Models.Cliente
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div style="background: #000099" class="card-header text-white">
+                        <h3 class="mb-0">Cadastro de Clientes - Detalhes</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Details" method="post" class="mt-4">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Nome" class="control-label">Nome: </label></strong>
+                                        @Model.Nome
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-2">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Email " class="control-label">Email: </label></strong>
+                                        @Model.Email
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Logotipo" class="control-label">Logotipo: </label></strong>
+                                        <img src="~/images/@Model.Logotipo" title="Logotipo do Cliente" style="width: 150px; height: auto;" />
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <strong><label asp-for="DataInclusao " class="control-label">Data Inclusão: </label></strong>
+                                        @Model.DataInclusao
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-2">
+                                    <div class="form-group">
+                                        <strong><label asp-for="DataAlteracao " class="control-label">Data Alteração: </label></strong>
+                                        @Model.DataAlteracao
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="form-group" align="center">
+                                <a asp-action="Index" class="btn btn-warning ml-2">Voltar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
