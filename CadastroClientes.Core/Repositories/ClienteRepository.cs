@@ -93,5 +93,17 @@ namespace CadastroClientes.Core.Repositories
             return await _dbContext.Clientes.AnyAsync(c => c.Email == email && c.Id != currentClientId);
         }
         #endregion
+
+        #region Exclui os Dados de um Cliente
+        public async Task DeleteCliente(int id)
+        {
+            var clienteToRemove = await _dbContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
+            if (clienteToRemove != null)
+            {
+                _dbContext.Clientes.Remove(clienteToRemove);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+        #endregion
     }
 }

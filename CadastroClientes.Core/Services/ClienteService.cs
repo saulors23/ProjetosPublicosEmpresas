@@ -98,5 +98,11 @@ namespace CadastroClientes.Core.Services
         }
         #endregion
 
+        #region Exclui os Dados de um Cliente
+        public async Task DeleteCliente(int id)
+        {
+            await _clienteRepository.DeleteCliente(id);
+        }
+        #endregion
     }
 }

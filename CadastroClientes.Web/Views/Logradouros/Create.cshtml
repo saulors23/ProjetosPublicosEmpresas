@@ -1,0 +1,79 @@
+﻿@model CadastroClientes.Core.Models.Logradouro
+@{
+    ViewData["Title"] = "Create";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div style="background: #ff9900" class="card-header text-white">
+                        <h3 class="mb-0">Cadastro de Logradouro - Novo</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Create" asp-route-clienteId="@Model.ClienteId" class="mt-4">
+                            <input type="hidden" name="ClienteId" value="@ViewBag.ClienteId" />
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Endereco" class="control-label">Endereço: <i class="fas fa-exclamation-circle" style="color: red;" title="Campo de Preenchimento Obrigatório!"></i></label></strong>
+                                        <input class="form-control form-control-sm" type="text" name="Endereco" id="Endereco" data-value="@Model?.Endereco" style="width: 350px" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-0">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Complemento" class="control-label">Complemento: </label></strong>
+                                        <input class="form-control form-control-sm" type="text" name="Complemento" id="Complemento" data-value="@Model?.Complemento" style="width: 205px;"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-0">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Bairro" class="control-label">Bairro: <i class="fas fa-exclamation-circle" style="color: red;" title="Campo de Preenchimento Obrigatório!"></i></label></strong>
+                                        <input class="form-control form-control-sm" type="text" name="Bairro" id="Bairro" data-value="@Model?.Bairro" style="width: 205px;" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>&nbsp;</div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Cidade" class="control-label">Cidade: <i class="fas fa-exclamation-circle" style="color: red;" title="Campo de Preenchimento Obrigatório!"></i></label></strong>
+                                        <input class="form-control form-control-sm" type="text" name="Cidade" id="Cidade" data-value="@Model?.Cidade" style="width: 205px;" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-2">
+                                    <strong><label asp-for="Uf" class="control-label">UF: <i class="fas fa-exclamation-circle" style="color: red;" title="Campo de Preenchimento Obrigatório!"></i></label></strong>
+                                    <input class="form-control form-control-sm" type="text" name="Uf" id="Uf" data-value="@Model?.Uf" style="width: 50px;" required />
+                                </div>
+                            </div>
+                            </br></br>
+                            <div class="form-group" align="center">
+                                <button type="submit" class="btn btn-success" title="Armazena todos os dados do cadastro">&nbsp;Salvar&nbsp;</button>
+                                <a asp-action="Index" class="btn btn-warning ml-2">Voltar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

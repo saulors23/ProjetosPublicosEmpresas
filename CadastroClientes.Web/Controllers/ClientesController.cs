@@ -200,5 +200,45 @@ namespace CadastroClientes.Web.Controllers
             }
         }
         #endregion
+
+        #region Exclusão de Cadastro de Cliente
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var cliente = _clienteService.GetClienteById(id);
+
+                if (cliente == null)
+                {
+                    return NotFound();
+                }
+                return View(cliente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(@"[Erro ao obter o cliente por ID: {ex.Message}]", ex);
+
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                await _clienteService.DeleteCliente(id);
+
+                TempData["DeleteSuccess"] = true;
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Erro ao Excluir o cliente. Entre em contato com o suporte.");
+                return RedirectToAction("Index");
+            }
+        }
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using CadastroClientes.Core.Models;
+﻿using CadastroClientes.Core.Data;
+using CadastroClientes.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,10 @@ namespace CadastroClientes.Core.Repositories.Interfaces
 {
     public interface ILogradouroRepository
     {
+        //Task<List<Logradouro>> GetLogradouros();
+        Task<List<Logradouro>> GetLogradouroById(int id);
         Task AddLogradouro(Logradouro logradouro);
-        Task<List<Logradouro>> GetLogradourosByClienteId(int clienteId);
+        //Task UpdateLogradouro(Logradouro logradouro);
+        //Task DeleteLogradouro(int id);
     }
 }

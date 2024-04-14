@@ -19,15 +19,19 @@ namespace CadastroClientes.Core.Repositories
             _context = context;
         }
 
+        #region Adicona Logradouro
         public async Task AddLogradouro(Logradouro logradouro)
         {
             _context.Logradouros.Add(logradouro);
             await _context.SaveChangesAsync();
         }
+        #endregion
 
-        public async Task<List<Logradouro>> GetLogradourosByClienteId(int clienteId)
+        #region Lista os Logradouros com referência ao Cliente
+        public async Task<List<Logradouro>> GetLogradouroById(int id)
         {
-            return await _context.Logradouros.Where(l => l.ClienteId == clienteId).ToListAsync();
+            return await _context.Logradouros.Where(l => l.ClienteId == id).ToListAsync();
         }
+        #endregion
     }
 }

@@ -1,4 +1,11 @@
-﻿@model IEnumerable<CadastroClientes.Core.Models.Cliente>
+﻿@model IEnumerable<CadastroClientes.Core.Models.Logradouro>
+@{
+    var clientes = ViewBag.Clientes as List<SelectListItem>;
+    if (clientes == null)
+    {
+        clientes = new List<SelectListItem>();
+    }
+}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,16 +21,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
 </head>
 <body>
-    <center><h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #000099;">Cadastro de Clientes</h2></center>
-    <a asp-action="Create" class="btn btn-primary" title="Cadastrar novo Cliente">Novo Cliente</a>
+    <center><h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #000099;">Cadastro de Logradouros do Cliente: @(ViewBag.Clientes != null ? ViewBag.Clientes.FirstOrDefault().Text : "N/A")</h2></center>    
+    <a asp-action="Index" asp-controller="Clientes" class="btn btn-warning ml-2" title="Retorna à Área de Clientes">Voltar</a> &nbsp;
+    <a asp-action="Create" class="btn btn-primary" title="Cadastrar novo Logradouro">Novo Logradouro</a>
     <p>&nbsp;</p>
 
     <div class="container">
         <table id="tbList" class="ui celled table" style="width:100%">
             <thead>
                 <tr>
-                    <th style="width: 250px">Nome</th>
-                    <th style="width: 210px">Email</th>
+                    <th style="width: 250px">Endereço</th>
+                    <th style="width: 250px">Complemento</th>
+                    <th style="width: 210px">Bairro</th>
+                    <th style="width: 210px">Cidade</th>
+                    <th style="width: 210px">UF</th>
                     <th style="width: 90px">DataInclusão</th>
                     <th style="width: 70px">DataAlteração</th>
                     <th style="width: 60px"><em class="fa fa-cog"></em></th>
@@ -32,18 +43,20 @@
             <tbody>
                 @if (Model != null && Model.Any())
                 {
-                    @foreach (var clientes in Model)
+                    @foreach (var logradouros in Model)
                     {
                         <tr>
-                            <td>@(clientes.Nome ?? "N/A")</td>
-                            <td>@(clientes.Email ?? "N/A")</td>
-                            <td>@(clientes.DataInclusao.ToString("dd/MM/yyyy"))</td>
-                            <td>@(clientes.DataAlteracao.HasValue ? clientes.DataAlteracao.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                            <td>@(logradouros.Endereco)</td>
+                            <td>@(logradouros.Complemento ?? "N/A")</td>
+                            <td>@(logradouros.Bairro)</td>
+                            <td>@(logradouros.Cidade)</td>
+                            <td>@(logradouros.Uf)</td>
+                            <td>@(logradouros.DataInclusao.ToString("dd/MM/yyyy"))</td>
+                            <td>@(logradouros.DataAlteracao.HasValue ? logradouros.DataAlteracao.Value.ToString("dd/MM/yyyy") : "N/A")</td>
                             <td>
-                                <a asp-action="Details" asp-route-id="@clientes.Id" style="color: blue" title="Visualiza os Detalhes do Cliente"><i class="fa-solid fa-magnifying-glass"></i></a> |
-                                <a asp-action="Edit" asp-route-id="@clientes.Id" style="color: green" title="Edita os Dados do Cliente"><i class="fas fa-edit"></i> </a> |
-                                <a asp-action="Delete" asp-route-id="@clientes.Id" style="color: red" title="Exclui o Cadastro do Cliente"><i class="fas fa-trash-alt"></i>  </a> |
-                                <a asp-action="Index" asp-controller="Logradouros" asp-route-clienteid="@clientes.Id" style="color: #ff9900" title="Adiciona um Logradouro para o Cliente"><i class="fa-solid fa-city"></i>  </a>
+                                <a asp-action="Details" asp-route-id="@logradouros.Id" style="color: blue" title="Visualiza os Detalhes do Logradouro"><i class="fa-solid fa-magnifying-glass"></i></a> |
+                                <a asp-action="Edit" asp-route-id="@logradouros.Id" style="color: green" title="Edita os Dados do Logradouro"><i class="fas fa-edit"></i> </a> |
+                                <a asp-action="Delete" asp-route-id="@logradouros.Id" style="color: red" title="Exclui o Cadastro do Logradouro"><i class="fas fa-trash-alt"></i>  </a> |
                             </td>
                         </tr>
                     }
@@ -69,7 +82,6 @@
         </div>
     </div>
     <!-- Fim Modal que exibe a mensagem quando o cliente é INSERIDO -->
-
     <!-- Modal que exibe a mensagem quando o cliente é ALTERADO -->
     <div class="modal fade" id="editSuccessModal" tabindex="-1" aria-labelledby="editSuccessModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -88,7 +100,6 @@
         </div>
     </div>
     <!-- Fim Modal que exibe a mensagem quando o cliente é ALTERADO -->
-
     <!-- Modal que exibe a mensagem quando o cliente é EXCLUÍDO -->
     <div class="modal fade" id="deleteSuccessModal" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -107,10 +118,9 @@
         </div>
     </div>
     <!-- Fim Modal que exibe a mensagem quando o cliente é EXCLUÍDO -->
-
     <!-- Script para Chamar o Modal Cliente Inserido -->
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             var createSuccess = '@TempData["CreateSuccess"]';
 
             if (createSuccess.toLowerCase() === 'true') {
@@ -120,10 +130,9 @@
         });
     </script>
     <!-- Fim Script para Chamar o Modal Cliente Inserido -->
-
     <!-- Script para Chamar o Modal Cliente Alterado -->
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             var editSuccess = '@TempData["EditSuccess"]';
 
             if (editSuccess.toLowerCase() === 'true') {
@@ -132,10 +141,9 @@
         });
     </script>
     <!-- Fim Script para Chamar o Modal Cliente Alterado -->
-
     <!-- Script para Chamar o Modal Cliente Excluído -->
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             var deleteSuccess = '@TempData["DeleteSuccess"]';
 
             if (deleteSuccess.toLowerCase() === 'true') {
@@ -144,7 +152,6 @@
         });
     </script>
     <!-- Fim Script para Chamar o Modal Cliente Excluído -->
-
     <!-- Script Data Table -->
     <script type="text/javascript">
         new DataTable('#tbList', {
@@ -153,7 +160,7 @@
             {
                 url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-BR.json',
             },
-            "autoWidth": false  
+            "autoWidth": false
         });
     </script>
     <!-- Fim Script Data Table -->
