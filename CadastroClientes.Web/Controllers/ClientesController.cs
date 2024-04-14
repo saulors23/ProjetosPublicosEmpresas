@@ -84,7 +84,7 @@ namespace CadastroClientes.Web.Controllers
                     }
 
                     if (Logotipo != null && Logotipo.Length > 0)
-                    {                        
+                    {
                         if (Logotipo.Length > 5 * 1024 * 1024)
                         {
                             ViewBag.ErrorMessage = "O tamanho da imagem do logotipo não pode exceder 5MB.";
@@ -115,7 +115,7 @@ namespace CadastroClientes.Web.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ViewBag.ErrorMessage = "Ocorreu um erro ao criar o cliente.";                    
+                    ViewBag.ErrorMessage = "Ocorreu um erro ao criar o cliente.";
                     return View(cliente);
                 }
             }
@@ -133,7 +133,7 @@ namespace CadastroClientes.Web.Controllers
             }
             return View(cliente);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Cliente cliente, IFormFile Logotipo)
@@ -145,15 +145,12 @@ namespace CadastroClientes.Web.Controllers
 
             var clienteAtual = await _clienteService.GetClienteById(id);
 
-            // Verifica se houve alterações nos campos Nome, Email e Logotipo
-            bool hasChanges =
-                clienteAtual.Nome != cliente.Nome ||
+            bool hasChanges =                
                 clienteAtual.Email != cliente.Email ||
-                Logotipo != null;
+                clienteAtual.Logotipo != cliente.Logotipo;
 
             if (!hasChanges)
             {
-                // Se não houver alterações, redireciona para a página inicial
                 return RedirectToAction("Index");
             }
 
@@ -161,9 +158,18 @@ namespace CadastroClientes.Web.Controllers
             {
                 if (Logotipo != null)
                 {
-                    // Realiza o upload do novo logotipo, se fornecido
                     var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(Logotipo.FileName);
                     var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", fileName);
+
+                    if (!string.IsNullOrEmpty(clienteAtual.Logotipo))
+                    {
+                        var oldFilePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", clienteAtual.Logotipo);
+                        if (System.IO.File.Exists(oldFilePath))
+                        {
+                            System.IO.File.Delete(oldFilePath);
+                        }
+                    }
+
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await Logotipo.CopyToAsync(stream);
@@ -172,11 +178,9 @@ namespace CadastroClientes.Web.Controllers
                 }
                 else
                 {
-                    // Mantém o logotipo atual se nenhum novo logotipo for fornecido
                     cliente.Logotipo = clienteAtual.Logotipo;
                 }
 
-                // Verifica se o email fornecido já existe para outro cliente
                 if (await _clienteService.EmailExistsExceptCurrent(cliente.Email, id))
                 {
                     ViewBag.EmailExistsError = "O Email do(a) Cliente Informado já Existe no Sistema.";
@@ -184,16 +188,13 @@ namespace CadastroClientes.Web.Controllers
                     return View(cliente);
                 }
 
-                // Atualiza o cliente no banco de dados
                 await _clienteService.UpdateCliente(cliente, _dbContext);
                 TempData["EditSuccess"] = true;
 
-                // Redireciona para a página inicial após a atualização
                 return RedirectToAction("Index");
             }
             catch (Exception)
             {
-                // Trata qualquer erro que possa ocorrer durante o processo
                 ModelState.AddModelError(string.Empty, "Erro ao editar o cliente. Entre em contato com o suporte.");
                 return View(cliente);
             }

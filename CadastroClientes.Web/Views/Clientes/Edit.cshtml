@@ -21,7 +21,7 @@
                         <h3 class="mb-0">Cadastro de Clientes - Editar</h3>
                     </div>
                     <div class="card-body">
-                        <form asp-action="Edit" method="post" class="mt-4">
+                        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="mt-4">
                             <input type="hidden" asp-for="Id" />
                             <div class="row">
                                 <div class="col-md-6">
@@ -126,8 +126,12 @@
         // Função para atualizar o valor do campo Logotipo antes de enviar o formulário
         function updateLogotipoValue() {
             const fileInput = document.getElementById('LogotipoInput');
-            const fileName = fileInput.files[0].name;
-            document.getElementById('Logotipo').value = fileName;
+            if(fileInput.files.lenght > 0){
+                const fileName = fileInput.files[0].name;
+                document.getElementById('Logotipo').value = fileName;
+            } else {
+                document.getElementById('Logotipo').value = '';
+            }                        
         }
 
         // Evento para chamar a função updateLogotipoValue quando um arquivo for selecionado
