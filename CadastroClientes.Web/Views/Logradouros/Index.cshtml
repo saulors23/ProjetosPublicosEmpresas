@@ -1,11 +1,4 @@
 ﻿@model IEnumerable<CadastroClientes.Core.Models.Logradouro>
-@{
-    var clientes = ViewBag.Clientes as List<SelectListItem>;
-    if (clientes == null)
-    {
-        clientes = new List<SelectListItem>();
-    }
-}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,9 +14,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
 </head>
 <body>
-    <center><h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #000099;">Cadastro de Logradouros do Cliente: @(ViewBag.Clientes != null ? ViewBag.Clientes.FirstOrDefault().Text : "N/A")</h2></center>    
+    @{
+        var clienteId = ViewBag.ClienteId ?? 00;
+        if (clienteId > 0)
+        {
+            <center>
+                <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #000099;">
+                    Cadastro de Logradouros do(a) Cliente:
+                </h2>
+                <h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #000000;">
+                    @(ViewBag.ClienteNome ?? "N/A")
+                </h2>
+            </center>
+        }
+        else
+        {
+            <center><h2 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #000099;">Cadastro de Logradouros</h2></center>
+        }
+
+    }    
+    <p>&nbsp;</p>
     <a asp-action="Index" asp-controller="Clientes" class="btn btn-warning ml-2" title="Retorna à Área de Clientes">Voltar</a> &nbsp;
-    <a asp-action="Create" class="btn btn-primary" title="Cadastrar novo Logradouro">Novo Logradouro</a>
+    <a asp-action="Create" asp-controller="Logradouros" asp-route-clienteid="@clienteId" class="btn btn-primary" title="Cadastrar novo Logradouro">Novo Logradouro</a>
     <p>&nbsp;</p>
 
     <div class="container">
@@ -34,10 +46,10 @@
                     <th style="width: 250px">Complemento</th>
                     <th style="width: 210px">Bairro</th>
                     <th style="width: 210px">Cidade</th>
-                    <th style="width: 210px">UF</th>
-                    <th style="width: 90px">DataInclusão</th>
-                    <th style="width: 70px">DataAlteração</th>
-                    <th style="width: 60px"><em class="fa fa-cog"></em></th>
+                    <th style="width: 100px">UF</th>
+                    <th style="width: 75px">Dt.Inclusão</th>
+                    <th style="width: 70px">Dt.Alteração</th>
+                    <th style="width: 110px"><em class="fa fa-cog"></em></th>
                 </tr>
             </thead>
             <tbody>

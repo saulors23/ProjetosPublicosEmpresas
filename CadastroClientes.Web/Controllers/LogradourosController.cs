@@ -21,29 +21,33 @@ namespace CadastroClientes.Web.Controllers
         }
 
         #region Consulta todos os Logradouros do Cliente
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int clienteId)
         {
             try
             {
+                var id = clienteId;
+
                 var cliente = await _clienteService.GetClienteById(id);
+
+                ViewBag.Clientes = id;
 
                 if (cliente != null)
                 {             
-                    var logradouros = await _logradouroService.GetLogradouroById(id);
-
+                    var logradouros = await _logradouroService.GetLogradouroById(clienteId);
+                   
                     if (logradouros != null && logradouros.Any())
                     {
-                        ViewBag.Clientes = new List<SelectListItem>
-                        {
-                            new SelectListItem { Value = cliente.Id.ToString(), Text = cliente.Nome }
-                        };                        
+                        ViewBag.ClienteId = cliente.Id;
+                        ViewBag.ClienteNome = cliente.Nome;
+
                         return View(logradouros);
                     }
                     else
-                    {                  
+                    {
+                        ViewBag.ClienteId = cliente.Id;
                         ViewBag.ErrorMessage = "Não há logradouros cadastrados para este cliente.";
                         return View(new List<Logradouro>());
-                    }
+                    }                    
                 }
                 else
                 {                    
@@ -81,7 +85,7 @@ namespace CadastroClientes.Web.Controllers
         }
         #endregion
 
-
+        [HttpGet]
         public IActionResult Create(int clienteId)
         {
             ViewBag.ClienteId = clienteId;
@@ -101,10 +105,11 @@ namespace CadastroClientes.Web.Controllers
 
                     TempData["CreateSuccess"] = true;
 
-                    return RedirectToAction("Index", new { id = clienteId });
+                    return RedirectToAction("Index", new { clienteId = clienteId });
                 }
                 catch (Exception ex)
                 {
+
                     ViewBag.ErrorMessage = "Ocorreu um erro ao criar o logradouro.";
                     return View(logradouro);
                 }

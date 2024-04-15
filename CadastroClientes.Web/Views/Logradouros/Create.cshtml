@@ -1,7 +1,5 @@
 ﻿@model CadastroClientes.Core.Models.Logradouro
-@{
-    ViewData["Title"] = "Create";
-}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -24,8 +22,8 @@
                         <h3 class="mb-0">Cadastro de Logradouro - Novo</h3>
                     </div>
                     <div class="card-body">
-                        <form asp-action="Create" asp-route-clienteId="@Model.ClienteId" class="mt-4">
-                            <input type="hidden" name="ClienteId" value="@ViewBag.ClienteId" />
+                        <form asp-action="Create" class="mt-4">
+                            <input type="hidden" name="clienteId" value="@ViewBag.ClienteId" />
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
