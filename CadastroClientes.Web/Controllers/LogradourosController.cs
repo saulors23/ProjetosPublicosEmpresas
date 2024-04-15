@@ -64,16 +64,19 @@ namespace CadastroClientes.Web.Controllers
         #endregion
 
         #region Consulta detalhes do Logradouro
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, int clienteId)
         {
             try
             {
-                var logradouro = await _logradouroService.GetLogradouroById(id);
+                var logradouro = await _logradouroService.GetLogradouroDetails(id, clienteId);
 
                 if (logradouro == null)
                 {
                     return NotFound();
                 }
+
+                ViewBag.ClienteId = clienteId;
+
                 return View(logradouro);
 
             }
@@ -85,6 +88,7 @@ namespace CadastroClientes.Web.Controllers
         }
         #endregion
 
+        #region Adiciona um novo Logradouro ao Cliente
         [HttpGet]
         public IActionResult Create(int clienteId)
         {
@@ -92,6 +96,7 @@ namespace CadastroClientes.Web.Controllers
             var logradouro = new Logradouro { ClienteId = clienteId };
             return View(logradouro);
         }
+        #endregion
 
         #region Adiciona um novo Logradouro ao Cliente
         [HttpPost]

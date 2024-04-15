@@ -33,5 +33,12 @@ namespace CadastroClientes.Core.Repositories
             return await _context.Logradouros.Where(l => l.ClienteId == id).ToListAsync();
         }
         #endregion
+
+        #region Lista os Detalhes de cada Logradouro
+        public async Task<Logradouro> GetLogradouroDetails(int id, int clienteId)
+        {
+            return await _context.Logradouros.FirstOrDefaultAsync(l => l.Id == id && l.ClienteId == clienteId);
+        }
+        #endregion
     }
 }

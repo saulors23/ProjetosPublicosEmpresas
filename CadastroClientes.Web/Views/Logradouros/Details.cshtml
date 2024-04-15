@@ -1,0 +1,89 @@
+﻿@model CadastroClientes.Core.Models.Logradouro
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div style="background: #ff9900" class="card-header text-white">
+                        <h3 class="mb-0">Cadastro de Logradouro - Detalhes</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Details" method="post" class="mt-4">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" name="clienteId" value="@ViewBag.ClienteId" />
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Endereco" class="control-label">Endereço: </label></strong>
+                                        @Model.Endereco
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-0">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Complemento" class="control-label">Complemento: </label></strong>
+                                        @Model.Complemento
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-0">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Bairro" class="control-label">Bairro: </label></strong>
+                                        @Model.Bairro
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Cidade" class="control-label">Cidade: </label></strong>
+                                        @Model.Cidade
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-2">
+                                    <div class="form-group">
+                                        <strong><label asp-for="Uf" class="control-label">UF: </label></strong>
+                                        @Model.Uf
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <strong><label asp-for="DataInclusao " class="control-label">Data Inclusão: </label></strong>
+                                        @Model.DataInclusao
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 offset-sm-2">
+                                    <div class="form-group">
+                                        <strong><label asp-for="DataAlteracao " class="control-label">Data Alteração: </label></strong>
+                                        @Model.DataAlteracao
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="form-group" align="center">
+                                <a asp-action="Index" asp-controller="Logradouros" asp-route-clienteId="@ViewBag.ClienteId" class="btn btn-warning ml-2">Voltar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

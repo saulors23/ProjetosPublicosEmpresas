@@ -42,10 +42,17 @@ namespace CadastroClientes.Core.Services
         //}
         //#endregion
 
-        #region Consulta detalhes do Logradouro
+        #region Consulta Logradouro por Id
         public async Task<List<Logradouro>> GetLogradouroById(int id)
         {
             return await _logradouroRepository.GetLogradouroById(id);
+        }
+        #endregion
+
+        #region Consulta detalhes do Logradouro
+        public async Task<Logradouro> GetLogradouroDetails(int id, int clienteId)
+        {
+            return await _logradouroRepository.GetLogradouroDetails(id, clienteId);
         }
         #endregion
 
