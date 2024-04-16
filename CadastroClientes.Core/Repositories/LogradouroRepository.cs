@@ -83,5 +83,17 @@ namespace CadastroClientes.Core.Repositories
             }
         }
         #endregion
+
+        #region Deletar Logradouros relacionado a um Cliente
+        public async Task DeleteLogradourosByClienteId(int clienteId)
+        {
+            var logradourosToRemove = await _context.Logradouros.Where(l => l.ClienteId == clienteId).ToListAsync();
+            if (logradourosToRemove.Any())
+            {
+                _context.Logradouros.RemoveRange(logradourosToRemove);
+                await _context.SaveChangesAsync();
+            }
+        }
+        #endregion
     }
 }

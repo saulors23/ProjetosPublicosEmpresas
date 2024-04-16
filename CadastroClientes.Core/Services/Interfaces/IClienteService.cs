@@ -17,6 +17,6 @@ namespace CadastroClientes.Core.Services.Interfaces
         Task<bool> EmailExistsExceptCurrent(string email, int currentClientId);
         Task AddCliente(Cliente cliente);
         Task UpdateCliente(Cliente cliente, AppDbContext context);
-        Task DeleteCliente(int id);
+        Task DeleteClienteELogradouros(int id, int clienteId);
     }
 }

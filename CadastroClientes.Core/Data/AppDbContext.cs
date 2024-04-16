@@ -13,7 +13,6 @@ namespace CadastroClientes.Core.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Logradouro> Logradouros { get; set; }
     }

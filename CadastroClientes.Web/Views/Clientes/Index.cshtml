@@ -107,8 +107,7 @@
         </div>
     </div>
     <!-- Fim Modal que exibe a mensagem quando o cliente é EXCLUÍDO -->
-
-    <!-- Script para Chamar o Modal Cliente Inserido -->
+    
     <script>
         $(document).ready(function () {            
             var createSuccess = '@TempData["CreateSuccess"]';
@@ -119,9 +118,7 @@
 
         });
     </script>
-    <!-- Fim Script para Chamar o Modal Cliente Inserido -->
 
-    <!-- Script para Chamar o Modal Cliente Alterado -->
     <script>
         $(document).ready(function () {            
             var editSuccess = '@TempData["EditSuccess"]';
@@ -131,9 +128,7 @@
             }
         });
     </script>
-    <!-- Fim Script para Chamar o Modal Cliente Alterado -->
 
-    <!-- Script para Chamar o Modal Cliente Excluído -->
     <script>
         $(document).ready(function () {            
             var deleteSuccess = '@TempData["DeleteSuccess"]';
@@ -143,9 +138,7 @@
             }
         });
     </script>
-    <!-- Fim Script para Chamar o Modal Cliente Excluído -->
 
-    <!-- Script Data Table -->
     <script type="text/javascript">
         new DataTable('#tbList', {
             "pagingType": "first_last_numbers",
@@ -156,6 +149,5 @@
             "autoWidth": false  
         });
     </script>
-    <!-- Fim Script Data Table -->
 </body>
 </html>

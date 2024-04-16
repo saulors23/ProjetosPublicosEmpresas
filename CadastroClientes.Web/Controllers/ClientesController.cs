@@ -20,7 +20,7 @@ namespace CadastroClientes.Web.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        #region Consulta todos os Clientes do Cadastro
+        #region Consultar todos os Clientes
         public async Task<IActionResult> Index()
         {
             try
@@ -37,7 +37,7 @@ namespace CadastroClientes.Web.Controllers
         }
         #endregion
 
-        #region Consulta detalhes do cliente no Cadastro
+        #region Consultar detalhes do Cliente
         public async Task<IActionResult> Details(int id)
         {
             try
@@ -66,7 +66,7 @@ namespace CadastroClientes.Web.Controllers
             return View(cliente);
         }
 
-        #region Adiciona um novo cliente no Cadastro
+        #region Adicionar Cliente
         [HttpPost]
         public async Task<IActionResult> Create(Cliente cliente, IFormFile Logotipo)
         {
@@ -90,20 +90,16 @@ namespace CadastroClientes.Web.Controllers
                             ViewBag.ErrorMessage = "O tamanho da imagem do logotipo não pode exceder 5MB.";
                             return View(cliente);
                         }
-
-                        // Gerar um nome único para o arquivo
+                        
                         var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(Logotipo.FileName);
 
-                        // Caminho físico onde o arquivo será armazenado
                         var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", fileName);
 
-                        // Salvar o arquivo fisicamente
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
                             await Logotipo.CopyToAsync(stream);
                         }
-
-                        // Atribuir o caminho relativo do arquivo ao campo Logotipo
+                        
                         cliente.Logotipo = fileName;
                     }
 
@@ -123,7 +119,7 @@ namespace CadastroClientes.Web.Controllers
         }
         #endregion
 
-        #region Edita os dados do cliente no Cadastro
+        #region Editar Cliente
         public async Task<IActionResult> Edit(int id)
         {
             var cliente = await _clienteService.GetClienteById(id);
@@ -201,12 +197,12 @@ namespace CadastroClientes.Web.Controllers
         }
         #endregion
 
-        #region Exclusão de Cadastro de Cliente
+        #region Deletar Cliente
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var cliente = _clienteService.GetClienteById(id);
+                var cliente = await _clienteService.GetClienteById(id);
 
                 if (cliente == null)
                 {
@@ -223,11 +219,13 @@ namespace CadastroClientes.Web.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteClienteELogradouros(int id)
         {
             try
             {
-                await _clienteService.DeleteCliente(id);
+                var clienteId = id;
+
+                await _clienteService.DeleteClienteELogradouros(id, clienteId);
 
                 TempData["DeleteSuccess"] = true;
 

@@ -102,8 +102,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>   
-
-    <!-- Script Limitar Tamanho Imagem Logotipo -->
+    
     <script>
         document.getElementById('Logotipo').addEventListener('change', function () {
             const fileInput = this;
@@ -116,22 +115,17 @@
                 }
             }
         });
-    </script>
-    <!-- Fim Script Limitar Tamanho Imagem Logotipo -->
+    </script>    
 
-    <script>
-        // Função para atualizar o valor do campo Logotipo antes de enviar o formulário
+    <script>        
         function updateLogotipoValue() {
             const fileInput = document.getElementById('LogotipoInput');
             const fileName = fileInput.files[0].name;
             document.getElementById('Logotipo').value = fileName;
-        }
-
-        // Evento para chamar a função updateLogotipoValue quando um arquivo for selecionado
+        }        
         document.getElementById('LogotipoInput').addEventListener('change', updateLogotipoValue);
     </script>
-
-    <!-- Script para Chamar o Modal Email Cliente Existente -->
+    
     <script>
         $(document).ready(function () {
             var emailExistsError = '@ViewBag.EmailExistsError';
@@ -146,7 +140,6 @@
                 $('#createEmailExistsModal').modal('show');
             }
         });
-    </script>
-    <!-- Fim Script para Chamar o Modal Email Cliente Existente -->
+    </script>    
 </body>
 </html>

@@ -20,7 +20,7 @@ namespace CadastroClientes.Web.Controllers
             _clienteService = clienteService;
         }
 
-        #region Consulta todos os Logradouros do Cliente
+        #region Consultar Logradouros
         public async Task<IActionResult> Index(int clienteId)
         {
             try
@@ -63,7 +63,7 @@ namespace CadastroClientes.Web.Controllers
         }
         #endregion
 
-        #region Consulta detalhes do Logradouro
+        #region Consultar detalhes do Logradouro
         public async Task<IActionResult> Details(int id, int clienteId)
         {
             try

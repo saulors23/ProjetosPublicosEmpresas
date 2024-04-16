@@ -21,14 +21,14 @@ namespace CadastroClientes.Core.Services
             _logradouroRepository = logradouroRepository;
         }
 
-        #region Consulta Logradouro por Id
+        #region Consultar Logradouro por Id
         public async Task<List<Logradouro>> GetLogradouroById(int id)
         {
             return await _logradouroRepository.GetLogradouroById(id);
         }
         #endregion
 
-        #region Consulta detalhes do Logradouro
+        #region Consultar detalhes do Logradouro
         public async Task<Logradouro> GetLogradouroDetails(int id, int clienteId)
         {
             return await _logradouroRepository.GetLogradouroDetails(id, clienteId);
@@ -59,6 +59,13 @@ namespace CadastroClientes.Core.Services
         public async Task DeleteLogradouro(int id)
         {
             await _logradouroRepository.DeleteLogradouro(id);
+        }
+        #endregion
+
+        #region Deletar Logradouros relacionado a um Cliente
+        public async Task DeleteLogradourosByClienteId(int clienteId)
+        {
+            await _logradouroRepository.DeleteLogradourosByClienteId(clienteId);
         }
         #endregion
     }

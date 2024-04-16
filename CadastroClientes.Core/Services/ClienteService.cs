@@ -1,5 +1,6 @@
 ﻿using CadastroClientes.Core.Data;
 using CadastroClientes.Core.Models;
+using CadastroClientes.Core.Repositories;
 using CadastroClientes.Core.Repositories.Interfaces;
 using CadastroClientes.Core.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,13 +16,15 @@ namespace CadastroClientes.Core.Services
     {
         private readonly DbContextOptions<AppDbContext> _dbContextOptions;
         private readonly IClienteRepository _clienteRepository;
-        public ClienteService(DbContextOptions<AppDbContext> dbContextOptions, IClienteRepository clienteRepository)
+        private readonly ILogradouroRepository _logradouroRepository;
+        public ClienteService(DbContextOptions<AppDbContext> dbContextOptions, IClienteRepository clienteRepository, ILogradouroRepository logradouroRepository)
         {
             _dbContextOptions = dbContextOptions;
             _clienteRepository = clienteRepository;
+            _logradouroRepository = logradouroRepository;
         }
 
-        #region Consulta todos os Clientes do Cadastro
+        #region Consultar todos os Clientes
         public async Task<List<Cliente>> GetClientes()
         {
             try
@@ -42,14 +45,14 @@ namespace CadastroClientes.Core.Services
         }
         #endregion
 
-        #region Consulta detalhes do cliente no Cadastro
+        #region Consultar detalhes do Cliente
         public async Task<Cliente> GetClienteById(int id)
         {
             return await _clienteRepository.GetClienteById(id);
         }
         #endregion
 
-        #region Adiciona um Novo Cliente
+        #region Adicionar Cliente
         public async Task<bool> EmailExists(string email)
         {
             return await _clienteRepository.EmailExists(email);
@@ -60,7 +63,7 @@ namespace CadastroClientes.Core.Services
         }
         #endregion
 
-        #region Altera dados do cliente no Cadastro
+        #region Alterar Cliente
         public async Task UpdateCliente(Cliente cliente, AppDbContext context)
         {
             try
@@ -91,17 +94,19 @@ namespace CadastroClientes.Core.Services
         }
         #endregion
 
-        #region Verificação se na Alteração do Cliente o email existe
+        #region Verificar se na Alteração do Cliente o email existe
         public async Task<bool> EmailExistsExceptCurrent(string email, int currentClientId)
         {
             return await _clienteRepository.EmailExistsExceptCurrent(email, currentClientId);
         }
         #endregion
 
-        #region Exclui os Dados de um Cliente
-        public async Task DeleteCliente(int id)
+        #region Deletar Cliente
+        public async Task DeleteClienteELogradouros(int id, int clienteId)
         {
-            await _clienteRepository.DeleteCliente(id);
+            await _logradouroRepository.DeleteLogradourosByClienteId(clienteId);
+
+            await _clienteRepository.DeleteCliente(id);            
         }
         #endregion
     }

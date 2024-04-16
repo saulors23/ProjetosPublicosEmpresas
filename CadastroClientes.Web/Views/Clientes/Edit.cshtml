@@ -107,8 +107,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Script Limitar Tamanho Imagem Logotipo -->
+    </div>    
     <script>
         document.getElementById('Logotipo').addEventListener('change', function () {
             const fileInput = this;
@@ -122,8 +121,7 @@
             }
         });
     </script>
-    <script>
-        // Função para atualizar o valor do campo Logotipo antes de enviar o formulário
+    <script>        
         function updateLogotipoValue() {
             const fileInput = document.getElementById('LogotipoInput');
             if(fileInput.files.lenght > 0){
@@ -132,13 +130,10 @@
             } else {
                 document.getElementById('Logotipo').value = '';
             }                        
-        }
-
-        // Evento para chamar a função updateLogotipoValue quando um arquivo for selecionado
+        }        
         document.getElementById('LogotipoInput').addEventListener('change', updateLogotipoValue);
     </script>
-
-    <!-- Script para Chamar o Modal Email Cliente Existente -->
+    
     <script>
         $(document).ready(function () {
             var emailExistsError = '@ViewBag.EmailExistsError';
@@ -162,7 +157,6 @@
         var logotipoUrl = $(this).data('logotipoUrl');
         $('#LogotipoAtual').attr('src', logotipoUrl);
         });
-    </script>
-    <!-- Fim Script para Chamar o Modal Email Cliente Existente -->
+    </script>    
 </body>
 

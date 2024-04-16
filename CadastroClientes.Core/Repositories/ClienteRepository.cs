@@ -18,7 +18,7 @@ namespace CadastroClientes.Core.Repositories
             _dbContext = dbContext;
         }
 
-        #region Lista todos os Clientes do Cadastro
+        #region Consultar todos os Clientes
         public async Task<List<Cliente>> GetClientes()
         {
             var clientes = await _dbContext.Clientes.ToListAsync();
@@ -29,21 +29,21 @@ namespace CadastroClientes.Core.Repositories
         }
         #endregion
 
-        #region Consulta detalhes do cliente no Cadastro
+        #region Consultar detalhes do Cliente
         public async Task<Cliente> GetClienteById(int id)
         {
             return await _dbContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
         }
         #endregion
 
-        #region Verifica se email já existe no cadastro
+        #region Verificar se email do Cliente já existe
         public async Task<bool> EmailExists(string email)
         {
             return await _dbContext.Clientes.AnyAsync(c => c.Email == email);
         }
         #endregion
 
-        #region Adiciona um Novo Cliente
+        #region Adicionar Cliente
         public async Task AddCliente(Cliente cliente)
         {
             if (cliente == null)
@@ -56,7 +56,7 @@ namespace CadastroClientes.Core.Repositories
         }
         #endregion
 
-        #region Altera dados do cliente no Cadastro
+        #region Alterar Cliente
         public async Task UpdateCliente(Cliente cliente, AppDbContext context)
         {
             try
@@ -87,14 +87,14 @@ namespace CadastroClientes.Core.Repositories
         }
         #endregion
 
-        #region Verificação se na Alteração do Cliente o email existe
+        #region Verificar se Alteração do Cliente email existe
         public async Task<bool> EmailExistsExceptCurrent(string email, int currentClientId)
         {
             return await _dbContext.Clientes.AnyAsync(c => c.Email == email && c.Id != currentClientId);
         }
         #endregion
 
-        #region Exclui os Dados de um Cliente
+        #region Deletar Cliente
         public async Task DeleteCliente(int id)
         {
             var clienteToRemove = await _dbContext.Clientes.FirstOrDefaultAsync(c => c.Id == id);
@@ -103,6 +103,9 @@ namespace CadastroClientes.Core.Repositories
                 _dbContext.Clientes.Remove(clienteToRemove);
                 await _dbContext.SaveChangesAsync();
             }
+
+            //var logradourosToDelete = await _dbContext.Logradouros.Where(l => l.ClienteId == id).ToListAsync();
+            //_dbContext.Logradouros.RemoveRange(logradourosToDelete);            
         }
         #endregion
     }
