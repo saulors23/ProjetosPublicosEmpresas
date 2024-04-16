@@ -67,8 +67,8 @@
                             <td>@(logradouros.DataAlteracao.HasValue ? logradouros.DataAlteracao.Value.ToString("dd/MM/yyyy") : "N/A")</td>
                             <td>
                                 <a asp-action="Details" asp-controller="Logradouros" asp-route-id="@logradouros.Id" asp-route-clienteid="@ViewBag.ClienteId" style="color: blue" title="Visualiza os Detalhes do Logradouro"><i class="fa-solid fa-magnifying-glass"></i></a> |
-                                <a asp-action="Edit" asp-route-id="@logradouros.Id" style="color: green" title="Edita os Dados do Logradouro"><i class="fas fa-edit"></i> </a> |
-                                <a asp-action="Delete" asp-route-id="@logradouros.Id" style="color: red" title="Exclui o Cadastro do Logradouro"><i class="fas fa-trash-alt"></i>  </a> |
+                                <a asp-action="Edit" asp-controller="Logradouros" asp-route-id="@logradouros.Id" asp-route-clienteid="@ViewBag.ClienteId" style="color: green" title="Edita os Dados do Logradouro"><i class="fas fa-edit"></i> </a> |
+                                <a asp-action="Delete" asp-controller="Logradouros" asp-route-id="@logradouros.Id" asp-route-clienteid="@ViewBag.ClienteId" style="color: red" title="Exclui o Cadastro do Logradouro"><i class="fas fa-trash-alt"></i>  </a>
                             </td>
                         </tr>
                     }
@@ -76,7 +76,7 @@
             </tbody>
         </table>
     </div>
-    <!-- Modal que exibe a mensagem quando o cliente é INSERIDO -->
+    <!-- Modal que exibe a mensagem quando o Logradouro é INSERIDO -->
     <div class="modal fade" id="createSuccessModal" tabindex="-1" aria-labelledby="createSuccessModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -85,7 +85,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Os Dados do(a) <b>Cliente</b> Foram Inseridos no Cadastro.</p>
+                    <p>Os Dados do <b>Logradouro</b> Foram Inseridos no Cadastro.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -93,8 +93,8 @@
             </div>
         </div>
     </div>
-    <!-- Fim Modal que exibe a mensagem quando o cliente é INSERIDO -->
-    <!-- Modal que exibe a mensagem quando o cliente é ALTERADO -->
+    <!-- Fim Modal que exibe a mensagem quando o Logradouro é INSERIDO -->
+    <!-- Modal que exibe a mensagem quando o Logradouro é ALTERADO -->
     <div class="modal fade" id="editSuccessModal" tabindex="-1" aria-labelledby="editSuccessModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -103,7 +103,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Os Dados do(a) <b>Cliente</b> Foram Alterados no Cadastro.</p>
+                    <p>Os Dados do <b>Logradouro</b> Foram Alterados no Cadastro.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -111,8 +111,8 @@
             </div>
         </div>
     </div>
-    <!-- Fim Modal que exibe a mensagem quando o cliente é ALTERADO -->
-    <!-- Modal que exibe a mensagem quando o cliente é EXCLUÍDO -->
+    <!-- Fim Modal que exibe a mensagem quando o Logradouro é ALTERADO -->
+    <!-- Modal que exibe a mensagem quando o Logradouro é EXCLUÍDO -->
     <div class="modal fade" id="deleteSuccessModal" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -121,7 +121,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Os Dados do(a) <b>Cliente</b> Foram Excluídos no Cadastro.</p>
+                    <p>Os Dados do <b>Logradouro</b> Foram Excluídos no Cadastro.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -129,8 +129,8 @@
             </div>
         </div>
     </div>
-    <!-- Fim Modal que exibe a mensagem quando o cliente é EXCLUÍDO -->
-    <!-- Script para Chamar o Modal Cliente Inserido -->
+    <!-- Fim Modal que exibe a mensagem quando o Logradouro é EXCLUÍDO -->
+    <!-- Script para Chamar o Modal Logradouro Inserido -->
     <script>
         $(document).ready(function () {
             var createSuccess = '@TempData["CreateSuccess"]';
@@ -141,8 +141,8 @@
 
         });
     </script>
-    <!-- Fim Script para Chamar o Modal Cliente Inserido -->
-    <!-- Script para Chamar o Modal Cliente Alterado -->
+    <!-- Fim Script para Chamar o Modal Logradouro Inserido -->
+    <!-- Script para Chamar o Modal Logradouro Alterado -->
     <script>
         $(document).ready(function () {
             var editSuccess = '@TempData["EditSuccess"]';
@@ -152,8 +152,8 @@
             }
         });
     </script>
-    <!-- Fim Script para Chamar o Modal Cliente Alterado -->
-    <!-- Script para Chamar o Modal Cliente Excluído -->
+    <!-- Fim Script para Chamar o Modal Logradouro Alterado -->
+    <!-- Script para Chamar o Modal Logradouro Excluído -->
     <script>
         $(document).ready(function () {
             var deleteSuccess = '@TempData["DeleteSuccess"]';
@@ -163,7 +163,7 @@
             }
         });
     </script>
-    <!-- Fim Script para Chamar o Modal Cliente Excluído -->
+    <!-- Fim Script para Chamar o Modal Logradouro Excluído -->
     <!-- Script Data Table -->
     <script type="text/javascript">
         new DataTable('#tbList', {

@@ -21,27 +21,6 @@ namespace CadastroClientes.Core.Services
             _logradouroRepository = logradouroRepository;
         }
 
-        //#region Consulta todos os Logradouros do Cadastro
-        //public async Task<List<Logradouro>> GetLogradouros()
-        //{
-        //    try
-        //    {
-        //        var listaLogradouros = await _logradouroRepository.GetLogradouros();
-
-        //        if (listaLogradouros != null && listaLogradouros is List<Logradouro>)
-        //        {
-        //            return listaLogradouros;
-        //        }
-
-        //        return new List<Logradouro>();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new List<Logradouro>();
-        //    }
-        //}
-        //#endregion
-
         #region Consulta Logradouro por Id
         public async Task<List<Logradouro>> GetLogradouroById(int id)
         {
@@ -56,7 +35,7 @@ namespace CadastroClientes.Core.Services
         }
         #endregion
 
-        #region Adiciona um Novo Logradouro
+        #region Adicionar um Novo Logradouro
         public async Task AddLogradouro(Logradouro logradouro, int clienteId)
         {
             logradouro.ClienteId = clienteId;
@@ -69,38 +48,18 @@ namespace CadastroClientes.Core.Services
         }
         #endregion
 
-        //#region Altera dados do Logradouro
-        //public async Task UpdateLogradouro(Logradouro logradouro, AppDbContext context)
-        //{
-        //    try
-        //    {                
-        //        if (logradouro != null)
-        //        {                    
-        //            context.Entry(logradouro).Property(x => x.DataInclusao).IsModified = false;
+        #region Alterar Logradouro
+        public async Task UpdateLogradouro(Logradouro logradouro, int id, int clienteId)
+        {
+            await _logradouroRepository.UpdateLogradouro(logradouro, id, clienteId);
+        }
+        #endregion
 
-        //            logradouro.DataAlteracao = DateTime.Now;
-
-        //            context.Entry(logradouro).State = EntityState.Modified;
-
-        //            await context.SaveChangesAsync();
-        //        }
-        //        else
-        //        {
-        //            throw new InvalidOperationException("Logradouro não encontrado");
-        //        }
-        //    }
-        //    catch (DbUpdateException ex)
-        //    {
-        //        throw new Exception("Erro ao atualizar o Logradouro no banco de dados.", ex);
-        //    }
-        //}
-        //#endregion
-
-        //#region Exclui Logradouro
-        //public async Task DeleteLogradouro(int id)
-        //{
-        //    await _logradouroRepository.DeleteLogradouro(id);
-        //}
-        //#endregion
+        #region Deletar Logradouro
+        public async Task DeleteLogradouro(int id)
+        {
+            await _logradouroRepository.DeleteLogradouro(id);
+        }
+        #endregion
     }
 }

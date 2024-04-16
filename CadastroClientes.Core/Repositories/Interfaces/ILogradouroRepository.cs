@@ -14,7 +14,7 @@ namespace CadastroClientes.Core.Repositories.Interfaces
         Task<List<Logradouro>> GetLogradouroById(int id);
         Task<Logradouro> GetLogradouroDetails(int id, int clienteId);        
         Task AddLogradouro(Logradouro logradouro);
-        //Task UpdateLogradouro(Logradouro logradouro);
-        //Task DeleteLogradouro(int id);
+        Task UpdateLogradouro(Logradouro logradouro, int id, int clienteId);
+        Task DeleteLogradouro(int id);
     }
 }

@@ -88,7 +88,7 @@ namespace CadastroClientes.Web.Controllers
         }
         #endregion
 
-        #region Adiciona um novo Logradouro ao Cliente
+        #region Adicionar Logradouro
         [HttpGet]
         public IActionResult Create(int clienteId)
         {
@@ -96,9 +96,7 @@ namespace CadastroClientes.Web.Controllers
             var logradouro = new Logradouro { ClienteId = clienteId };
             return View(logradouro);
         }
-        #endregion
 
-        #region Adiciona um novo Logradouro ao Cliente
         [HttpPost]
         public async Task<IActionResult> Create(Logradouro logradouro, int clienteId)
         {
@@ -120,6 +118,96 @@ namespace CadastroClientes.Web.Controllers
                 }
             }
             return View(logradouro);
+        }
+        #endregion
+
+        #region Editar Logradouro
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id, int clienteId)
+        {
+            try
+            {
+                var logradouro = await _logradouroService.GetLogradouroDetails(id, clienteId);
+
+                if (logradouro == null)
+                {
+                    return NotFound();
+                }
+
+                ViewBag.ClienteId = clienteId;
+
+                return View(logradouro);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Ocorreu um erro ao carregar os detalhes do Logradouro.";
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, int clienteId, Logradouro logradouro)
+        {
+            if (ModelState.IsValid && clienteId != 0)
+            {
+                try
+                {
+                    await _logradouroService.UpdateLogradouro(logradouro, id, clienteId);
+
+                    TempData["EditSuccess"] = true;
+
+                    return RedirectToAction("Index", new { clienteId = clienteId });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Ocorreu um erro ao atualizar o logradouro.";
+                    return View(logradouro);
+                }
+            }
+            return View(logradouro);
+        }
+        #endregion
+
+        #region Deletar Logradouro
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id, int clienteId)
+        {
+            try
+            {
+                var logradouro = await _logradouroService.GetLogradouroDetails(id, clienteId);
+
+                if (logradouro == null)
+                {
+                    return NotFound();
+                }
+
+                ViewBag.ClienteId = clienteId;
+
+                return View(logradouro);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Ocorreu um erro ao carregar os detalhes do Logradouro.";
+                return View();
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id, int clienteId)
+        {
+            try
+            {
+                await _logradouroService.DeleteLogradouro(id);
+
+                TempData["DeleteSuccess"] = true;
+
+                return RedirectToAction("Index", new { clienteId = clienteId });
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Ocorreu um erro ao excluir o logradouro.";
+                return RedirectToAction("Index", new { clienteId = clienteId });
+            }
         }
         #endregion
     }

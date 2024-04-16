@@ -15,8 +15,8 @@ namespace CadastroClientes.Core.Services.Interfaces
         Task<Logradouro> GetLogradouroDetails(int id, int clienteId);        
         Task AddLogradouro(Logradouro logradouro, int clienteId);
         Task AddLogradouroWithClientId(Logradouro logradouro, int clienteId);
-        //Task UpdateLogradouro(Logradouro logradouro, AppDbContext context);
-        //Task DeleteLogradouro(int id);
+        Task UpdateLogradouro(Logradouro logradouro, int id, int clienteId);
+        Task DeleteLogradouro(int id);
 
     }
 }
