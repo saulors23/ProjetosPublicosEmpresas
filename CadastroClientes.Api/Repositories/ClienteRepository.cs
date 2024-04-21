@@ -1,6 +1,6 @@
-﻿using CadastroClientes.Core.Data;
-using CadastroClientes.Core.Models;
-using CadastroClientes.Core.Repositories.Interfaces;
+﻿using CadastroClientes.Api.Data;
+using CadastroClientes.Api.Models;
+using CadastroClientes.Api.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CadastroClientes.Core.Repositories
+namespace CadastroClientes.Api.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {

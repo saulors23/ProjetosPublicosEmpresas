@@ -1,17 +1,11 @@
-﻿using CadastroClientes.Core.Data;
-using CadastroClientes.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CadastroClientes.Api.Models;
 
-namespace CadastroClientes.Core.Services.Interfaces
+namespace CadastroClientes.Api.Services.Interfaces
 {
     public interface ILogradouroService
-    {        
+    {
         Task<List<Logradouro>> GetLogradouroById(int id);
-        Task<Logradouro> GetLogradouroDetails(int id, int clienteId);        
+        Task<Logradouro> GetLogradouroDetails(int id, int clienteId);
         Task AddLogradouro(Logradouro logradouro, int clienteId);
         Task AddLogradouroWithClientId(Logradouro logradouro, int clienteId);
         Task UpdateLogradouro(Logradouro logradouro, int id, int clienteId);
